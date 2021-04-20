@@ -64,16 +64,16 @@ class Employee {
 
 class Manager extends Employee {
   constructor(first_name, last_name, email, age, reports){
-    let listOfReports = [];
-
+    // let listOfReports = [];
     super(first_name, last_name, email, age)
-    this.reports = listOfReports
-    this.hire = function(employee){
-      listOfReports.push(employee)
-    }
-    this.fire = function(employee){
-      listOfReports.splice(employee, 1)
-    }
+    this.reports = [];
+
+  }
+  hire(employee){
+    this.reports.push(employee)
+  }
+  fire(index){
+    this.reports.splice(index, 1)
   }
 }
 
@@ -103,23 +103,38 @@ class Manager extends Employee {
 //Code Here
 
 class ProgressiveManager extends Manager{
-  constructor(first_name, last_name, email, age, reports, title, bonus){
+  constructor(first_name, last_name, email, age, reports){
 
     
-    super(first_name, last_name, email, age, reports)
-    this.title = 'Not a manager'
-    this.bonus = 0
-    this.fireBonus = function(listOfReports){
-      for (let i = 0; i < this.listOfReports.length; i++){
-        return this.bonus += (100 * (this.listOfReports.length - 1))
-    }
-    
-    
+    super(first_name, last_name, email, age, reports);
+    this.title = 'Not a manager';
+    this.bonus = 0;
   }
+
+  hire(){
+
+    super.hire()
+     if ( this.reports.length  >= 1 && this.reports.length  <= 3){
+        this.title = 'Barely Manager'
+      } else if ( this.reports.length  >= 4 && this.reports.length  <= 10){
+        this.title = 'Mostly Manager'
+      } else if ( this.reports.length  >= 11 && this.reports.length  <= 50){
+        this.title = 'Manager'
+      } else if ( this.reports.length  >= 51 && this.reports.length  <= 100){
+        this.title = 'Manager Plus'
+      } else if (this.reports.length  >= 101){
+        this.title = 'Bestest Manager'
+      }
+  
+}
+
+fire(){
+  super.fire()
+  this.bonus += 100 
 }
 }
 
-
+// console.log(title)
 
 
 ////////// PROBLEM 4 - Black Diamond //////////
@@ -147,3 +162,9 @@ class ProgressiveManager extends Manager{
 
 //Code Here
 
+// class Machine {
+//   constructor(){
+//     this.widgets_made_count = 0,
+//     this.wear_and_teat
+//   }
+// }
